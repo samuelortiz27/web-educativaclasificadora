@@ -4,11 +4,13 @@ from django.templatetags.static import static
 from .ml.predict import predict_image
 
 def clasificar_residuo(request):
+
     resultado = None
     info = None
-    color_contenedor = None
+    color_contenedor = "#ffffff"
     imagen_url = None
     contenedor_img = None
+    text_color = "#000000"
 
     if request.method == 'POST' and request.FILES.get('imagen'):
         imagen = request.FILES['imagen']
@@ -18,14 +20,13 @@ def clasificar_residuo(request):
 
         ruta_imagen = fs.path(filename)
         resultado = predict_image(ruta_imagen)
-
         resultado_lower = resultado.lower()
 
         if resultado_lower in ['carton', 'vidrio', 'plastico', 'metal', 'papel']:
             info = "♻️ Este residuo es reciclable. Debes depositarlo en el contenedor blanco."
             color_contenedor = "#FFFFFF"
             contenedor_img = static('clasificador/img/contenedor_reciclable.jpg')
-            text_color = "#000000"  # negro para fondo blanco
+            text_color = "#000000"  
         elif resultado_lower in ['organico', 'orgánico']:
             info = "🌿 Este residuo es orgánico. Debes depositarlo en el contenedor verde."
             color_contenedor = "#28a745"
@@ -37,9 +38,10 @@ def clasificar_residuo(request):
             contenedor_img = static('clasificador/img/contenedor_no_reciclable.jpg')
             text_color = "#ffffff"
         else:
-            info = "No se reconoce el tipo de residuo. Intenta con otra imagen."
+            info = "⚠️ No se reconoce el tipo de residuo. Intenta con otra imagen."
             color_contenedor = "#6c757d"
             contenedor_img = None
+            text_color = "#ffffff"
 
     return render(request, 'clasificador/clasificador.html', {
         'resultado': resultado,
