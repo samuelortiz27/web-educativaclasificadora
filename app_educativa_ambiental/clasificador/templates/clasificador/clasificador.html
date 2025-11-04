@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clasificador de Residuos</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'clasificador/css/styles.css' %}">
+</head>
+<body>
+    <div class="card">
+        <h1>Clasificador de Residuos</h1>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="imagen" accept="image/*" required>
+            <br>
+            <button type="submit">Clasificar</button>
+        </form>
+
+        {% if imagen_url %}
+            <img src="{{ imagen_url }}" alt="Imagen subida">
+        {% endif %}
+
+        {% if resultado %}
+            <div class="resultado">
+                Resultado: {{ resultado }}
+            </div>
+
+            <div class="info" style="background-color: {{ color_contenedor }}; color: {{ text_color }};">
+                {{ info }}
+            </div>
+
+            {% if contenedor_img %}
+                <div style="margin-top: 20px;">
+                    <h3>Contenedor recomendado:</h3>
+                    <img src="{{ contenedor_img }}" alt="Contenedor" style="max-width: 200px;">
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
