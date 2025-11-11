@@ -1,0 +1,87 @@
+{% extends 'ecoeduca/base.html' %}
+{% load static %}
+
+{% block title %}Aprende - EcoEduca{% endblock %}
+
+{% block content %}
+<section class="aprende-section">
+    <div class="text-center mb-5">
+        <h1 class="aprende-titulo">🌿 Aprende a Cuidar el Planeta</h1>
+        <p class="aprende-subtitulo">
+            Conoce los tipos de residuos, su impacto ambiental y cómo puedes aportar al cambio.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="aprende-card shadow-sm p-4 rounded-3 bg-light">
+                <h3 class="fw-bold text-success mb-3">♻️ Tipos de Residuos</h3>
+                <p>Descubre cómo separar correctamente los materiales para un reciclaje efectivo.</p>
+
+                
+                <div class="text-center mt-4">
+                    <a href="{% url 'ecoeduca:detalle_residuos_general' %}" 
+                        class="btn btn-success btn-lg rounded-pill shadow-sm px-4 py-2" 
+                        style="background: linear-gradient(135deg, #4CAF50, #81C784); border: none;">
+                        🌱 Ver todos los tipos de residuos
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+<div class="col-md-4">
+    <div class="aprende-card shadow-sm p-4 rounded-3 bg-light">
+        <h3 class="fw-bold text-primary mb-3">🌍 Impacto Ambiental</h3>
+        <p>
+            Conoce cuánto tarda en degradarse cada material y cómo tus hábitos diarios
+            pueden reducir la contaminación.
+        </p>
+
+
+        <div class="text-center mt-4">
+            <a href="{% url 'ecoeduca:impacto_ambiental' %}" 
+                class="btn btn-primary btn-lg rounded-pill shadow-sm px-4 py-2"
+                style="background: linear-gradient(135deg, #2196F3, #64B5F6); border: none;">
+                🌎 Ver más información
+            </a>
+        </div>
+    </div>
+</div>
+
+    
+        <div class="col-md-4">
+            <div class="aprende-card shadow-sm p-4 rounded-3 bg-light">
+                <h3 class="fw-bold text-warning mb-3">📍 Puntos de reciclaje</h3>
+                <p>
+                    Encuentra los lugares más cercanos de la ciudad para dejar tus residuos correctamente.
+                </p>
+            <div class="text-center mt-4">
+                <a href="{% url 'puntos:mapa_y_busqueda' %}" 
+                    class="btn btn-warning btn-lg rounded-pill shadow-sm px-4 py-2"
+                    style="background: linear-gradient(135deg, #FF9800, #FFB74D); border: none;">
+                        📌 Ver puntos de reciclaje
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="aprende-extra mt-5 p-4 rounded-3 shadow-sm bg-white">
+        <h2 class="text-center mb-3">🌎 Acciones que puedes tomar hoy</h2>
+        <ul class="list-unstyled text-center">
+            <li>👜 Usa bolsas reutilizables y evita plásticos de un solo uso.</li>
+            <li>🏠 Clasifica los residuos desde casa antes de sacarlos.</li>
+            <li>🤝 Participa en campañas locales de reciclaje en tu comunidad.</li>
+        </ul>
+
+    <div class="text-center mt-4">
+            <a href="{% url 'ecoeduca:inicio' %}" 
+                class="btn btn-success ecoedu-btn">
+                Volver al inicio
+            </a>
+        </div>
+</div>
+    </div>
+</section>
+{% endblock %}

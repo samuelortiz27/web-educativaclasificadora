@@ -1,0 +1,124 @@
+{% extends 'ecoeduca/base.html' %}
+{% load static %}
+
+{% block title %}Impacto Ambiental - EcoEduca{% endblock %}
+
+{% block content %}
+<section class="impacto-ambiental py-5" style="background-color: #f4f9f4;">
+    <div class="container text-center mb-5">
+        <h1 class="display-5 fw-bold text-success mb-3">🌍 Impacto Ambiental del Mal Reciclaje</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 900px;">
+            Cada desecho que tiramos sin clasificar correctamente tiene un efecto directo sobre el planeta.
+            El mal reciclaje contribuye al cambio climático, contamina los ecosistemas y pone en riesgo la vida
+            de millones de especies. Conocer su impacto es el primer paso hacia un cambio sostenible.
+        </p>
+    </div>
+
+    <div class="container bg-white rounded-4 shadow-sm p-5 mb-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2 class="text-primary mb-3">💨 Contaminación del aire y del agua</h2>
+                <p>
+                    Cuando los residuos se depositan en lugares no adecuados, liberan gases como metano, dióxido de carbono 
+                    y óxidos de nitrógeno, que contribuyen al calentamiento global. 
+                    Además, los líquidos tóxicos que se filtran de los basureros conocidos como <strong>lixiviados</strong>
+                    contaminan ríos, lagos y mares, afectando directamente a comunidades y ecosistemas acuáticos.
+                </p>
+                <p>
+                    El plástico, por ejemplo, puede tardar más de <strong>400 años</strong> en degradarse. Durante ese tiempo, 
+                    se fragmenta en microplásticos que contaminan el agua que bebemos y los alimentos que consumimos.
+                </p>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="{% static 'ecoeduca/img/contaminacion_agua.jpg' %}" 
+                    alt="Contaminación del agua" class="img-fluid rounded-4 shadow-sm">
+            </div>
+        </div>
+    </div>
+
+    <div class="container bg-white rounded-4 shadow-sm p-5 mb-5">
+        <div class="row align-items-center flex-md-row-reverse">
+            <div class="col-md-6">
+                <h2 class="text-success mb-3">🐢 Daños a la fauna y flora</h2>
+                <p>
+                    Los animales marinos y terrestres confunden los residuos con alimento o quedan atrapados en ellos.
+                    Cada año, más de <strong>100.000 animales marinos</strong> mueren por ingerir plástico.
+                    Estos residuos también afectan los suelos agrícolas, alterando su composición y reduciendo su fertilidad.
+                </p>
+                <p>
+                    Los microplásticos ya se encuentran en los peces, la sal y el agua potable, 
+                    entrando silenciosamente en la cadena alimentaria humana.
+                </p>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="{% static 'ecoeduca/img/fauna_afectada.jpg' %}" 
+                    alt="Fauna afectada por residuos" class="img-fluid rounded-4 shadow-sm">
+            </div>
+        </div>
+    </div>
+
+    <div class="container bg-white rounded-4 shadow-sm p-5 mb-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2 class="text-danger mb-3">🔥 Aumento de vertederos y pérdida de suelos</h2>
+                <p>
+                    El crecimiento descontrolado de los vertederos provoca la pérdida de grandes extensiones de tierra fértil,
+                    destruye hábitats naturales y emite gases tóxicos. 
+                    En algunos casos, los incendios en basureros generan humo con sustancias cancerígenas y dañinas
+                    para la salud respiratoria.
+                </p>
+                <p>
+                    Muchos vertederos en países en desarrollo se ubican cerca de comunidades vulnerables, 
+                    exponiendo a miles de personas a contaminación constante.
+                </p>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="{% static 'ecoeduca/img/vertederos.jpg' %}" 
+                    alt="Vertederos y contaminación del suelo" class="img-fluid rounded-4 shadow-sm">
+            </div>
+        </div>
+    </div>
+
+    <div class="container bg-light rounded-4 shadow-sm p-5">
+        <h2 class="text-center text-success mb-4">♻️ Soluciones sostenibles</h2>
+        <p class="text-center mb-4">
+            El cambio comienza con pequeñas acciones diarias. 
+            Si cada persona clasifica sus residuos correctamente y adopta hábitos sostenibles, 
+            podemos reducir drásticamente el impacto ambiental global.
+        </p>
+
+        <div class="row text-center g-4">
+            <div class="col-md-3">
+                <div class="p-3 border rounded-4 bg-white shadow-sm h-100">
+                    <h5>🏠 Clasifica en casa</h5>
+                    <p>Separa los residuos orgánicos, reciclables y no reciclables antes de sacarlos.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 border rounded-4 bg-white shadow-sm h-100">
+                    <h5>👜 Reutiliza y reduce</h5>
+                    <p>Evita plásticos de un solo uso y prefiere productos reutilizables.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 border rounded-4 bg-white shadow-sm h-100">
+                    <h5>🤝 Participa</h5>
+                    <p>Únete a programas de reciclaje y campañas ambientales locales.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 border rounded-4 bg-white shadow-sm h-100">
+                    <h5>🌱 Educa</h5>
+                    <p>Comparte el conocimiento sobre reciclaje y sostenibilidad con tu comunidad.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <a href="{% url 'ecoeduca:aprende' %}" class="btn btn-success btn-lg rounded-pill shadow-sm px-5 py-2">
+            ⬅️ Volver a Aprender
+        </a>
+    </div>
+</section>
+{% endblock %}

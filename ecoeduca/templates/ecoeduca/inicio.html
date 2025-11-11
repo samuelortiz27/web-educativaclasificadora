@@ -1,0 +1,39 @@
+{% extends 'ecoeduca/base.html' %}
+{% load static %}
+
+{% block title %}Inicio — EcoEduca{% endblock %}
+
+{% block content %}
+<header class="inicio-header">
+    <h1 class="inicio-titulo">♻️ EcoEduca</h1>
+    <p class="inicio-subtitulo">Aprende, clasifica y cuida el planeta 🌎</p>
+</header>
+
+<section class="inicio-hero">
+    <div class="inicio-hero-content">
+        <h2>Aprende a cuidar el planeta</h2>
+        <p>Descubre cómo reducir, reutilizar y reciclar de manera inteligente con la ayuda de la inteligencia artificial.</p>
+        <a href="{% url 'clasificador:clasificar' %}" class="inicio-btn">Probar Clasificador</a>
+    </div>
+</section>
+
+<section class="inicio-info">
+    <h2>¿Qué encontrarás aquí?</h2>
+    <div class="inicio-cards">
+        <div class="inicio-card">
+            <h3>🌿 Educación ambiental</h3>
+            <p>Aprende sobre los tipos de residuos, su impacto y cómo clasificarlos correctamente.</p>
+            <a href="{% url 'ecoeduca:aprende' %}" class="btn btn-success mt-2">Ir a Aprende</a>
+        </div>
+        <div class="inicio-card">
+            <h3>🤖 Clasificador inteligente</h3>
+            <p>Usa nuestra IA para identificar materiales reciclables en tiempo real.</p>
+            <a href="{% url 'clasificador:clasificar' %}" class="btn btn-success mt-2">Probar Clasificador</a>
+        </div>
+        <div class="inicio-card">
+    <h3>📍 Puntos de reciclaje</h3>
+    <p>Encuentra los lugares más cercanos de la ciudad para dejar tus residuos correctamente.</p>
+    <a href="{% url 'puntos:mapa_y_busqueda' %}" class="btn btn-success mt-2"> Ver puntos por categoría</a>
+</div>
+</section>
+{% endblock %}

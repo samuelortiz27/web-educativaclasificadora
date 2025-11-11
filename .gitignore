@@ -1,0 +1,13 @@
+venv/
+
+# Archivos Python compilados
+*.pyc
+__pycache__/
+
+# Base de datos de Django
+db.sqlite3
+
+# Archivos del sistema
+.DS_Store
+
+media/

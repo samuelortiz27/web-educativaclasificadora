@@ -1,0 +1,44 @@
+/* Estilos del Clasificador EcoEduca */
+
+.ecoedu-clasificador-card {
+    max-width: 600px; /* 🔹 Menos ancho */
+    background-color: #fdfdfd;
+    border-radius: 15px;
+    border: 2px solid #e0f2f1;
+}
+
+.ecoedu-clasificador-titulo {
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+.ecoedu-clasificador-descripcion {
+    color: #4b4b4b;
+    font-size: 1.1rem;
+}
+
+.ecoedu-btn {
+    background-color: #388e3c;
+    border: none;
+    transition: background-color 0.3s ease;
+    padding: 10px 20px;
+}
+
+.ecoedu-btn:hover {
+    background-color: #2e7d32;
+}
+
+.ecoedu-imagen img {
+    border: 3px solid #a5d6a7;
+    border-radius: 10px;
+}
+
+.ecoedu-info {
+    font-weight: 500;
+    border: 2px solid #c8e6c9;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.ecoedu-contenedor h4 {
+    color: #1b5e20;
+}

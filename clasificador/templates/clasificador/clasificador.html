@@ -1,0 +1,104 @@
+{% extends 'ecoeduca/base.html' %}
+{% load static %}
+
+{% block title %}Clasificador de Residuos{% endblock %}
+
+{% block content %}
+<div class="ecoedu-clasificador container mt-5">
+    <div class="card shadow-lg p-4 text-center mx-auto ecoedu-clasificador-card">
+        <h1 class="ecoedu-clasificador-titulo mb-3">Clasificador de Residuos</h1>
+        <p class="ecoedu-clasificador-descripcion mb-4">
+            Sube una imagen para identificar el tipo de residuo y el contenedor adecuado.
+        </p>
+
+        <form method="post" enctype="multipart/form-data" class="mb-4">
+            {% csrf_token %}
+            <input type="file" name="imagen" accept="image/*" class="form-control mb-3" required>
+            <button type="submit" class="btn btn-success ecoedu-btn">Clasificar</button>
+        </form>
+
+        {% if imagen_url %}
+        <div class="ecoedu-imagen mb-3">
+            <img src="{{ imagen_url }}" alt="Imagen subida" class="img-fluid rounded shadow-sm" style="max-width: 300px;">
+        </div>
+        {% endif %}
+
+        {% if resultado %}
+        <div class="alert alert-info mt-3">
+            <strong>Resultado:</strong> {{ resultado }}
+        </div>
+
+        <div class="ecoedu-info mt-3 p-3 rounded"
+            style="background-color: {{ color_contenedor }}; color: {{ text_color }};">
+            {{ info }}
+        </div>
+
+        {% if contenedor_img %}
+        <div class="ecoedu-contenedor mt-4">
+            <h4>Contenedor recomendado:</h4>
+            <img src="{{ contenedor_img }}" alt="Contenedor" class="img-fluid" style="max-width: 180px;">
+        </div>
+        {% endif %}
+
+        {% if puntos_relacionados %}
+        <div class="mt-4 p-3 rounded shadow-sm bg-light text-start">
+            <h4 class="mb-3 text-success">♻️ Puntos de reciclaje cercanos:</h4>
+            <ul class="list-group mb-3">
+                {% for punto in puntos_relacionados %}
+                <li class="list-group-item">
+                    <strong>{{ punto.nombre }}</strong><br>
+                    <span class="text-muted">{{ punto.direccion }}</span><br>
+                    {% if punto.descripcion %}
+                        <small>{{ punto.descripcion }}</small><br>
+                    {% endif %}
+                    {% if punto.telefono %}
+                        <small>📞 {{ punto.telefono }}</small>
+                    {% endif %}
+                </li>
+                {% empty %}
+                <li class="list-group-item text-muted">No se encontraron puntos de reciclaje relacionados.</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Mapa -->
+            <div id="map" style="height: 400px; width: 100%;"></div>
+        </div>
+        {% endif %}
+        {% endif %}
+
+        <!-- Botón volver al inicio -->
+        <div class="text-center mt-4">
+            <a href="{% url 'ecoeduca:inicio' %}" class="btn btn-success ecoedu-btn">
+                Volver al inicio
+            </a>
+        </div>
+    </div>
+</div>
+
+{% if puntos_relacionados %}
+<!-- Leaflet CSS y JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    var map = L.map('map').setView([0, 0], 2); // vista inicial
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    var bounds = [];
+
+    {% for punto in puntos_relacionados %}
+        {% if punto.latitud and punto.longitud %}
+            var marker = L.marker([{{ punto.latitud }}, {{ punto.longitud }}]).addTo(map)
+                .bindPopup("<strong>{{ punto.nombre }}</strong><br>{{ punto.direccion }}");
+            bounds.push([{{ punto.latitud }}, {{ punto.longitud }}]);
+        {% endif %}
+    {% endfor %}
+
+    if(bounds.length > 0){
+        map.fitBounds(bounds);
+    }
+</script>
+{% endif %}
+{% endblock %}

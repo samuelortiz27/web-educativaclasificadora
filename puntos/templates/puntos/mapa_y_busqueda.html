@@ -1,0 +1,95 @@
+{% extends 'ecoeduca/base.html' %}
+
+{% block title %}Mapa y Búsqueda de Puntos de Reciclaje{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <h1 class="mb-4 text-success">♻️ Mapa de Puntos de Reciclaje</h1>
+    <div id="map" style="height: 500px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></div>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        var map = L.map('map').setView([4.436495, -75.205168], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        {% for punto in puntos %}
+            {% if punto.latitud and punto.longitud %}
+                L.marker([{{ punto.latitud }}, {{ punto.longitud }}])
+                .bindPopup("<strong>{{ punto.nombre }}</strong><br>{{ punto.direccion }}{% if punto.telefono %}<br>📞 {{ punto.telefono }}{% endif %}")
+                .addTo(map);
+            {% endif %}
+        {% endfor %}
+    </script>
+
+    <div class="mt-5 p-4 bg-light rounded shadow-sm form-card">
+        <h2 class="mb-3 text-success">Búsqueda Avanzada</h2>
+        <form method="get" class="row g-3" id="busqueda-form">
+            <div class="col-md-4">
+                {{ form.tipo_residuo.label_tag }}<br>
+                {{ form.tipo_residuo }}
+            </div>
+            <div class="col-md-4">
+                {{ form.categoria.label_tag }}<br>
+                {{ form.categoria }}
+            </div>
+            <div class="col-md-4 d-flex align-items-end gap-2">
+                <button type="button" class="btn btn-outline-success" id="mi-ubicacion-btn">
+                    📍 Buscar cerca de mí
+                </button>
+                <button type="submit" class="btn btn-success">Buscar</button>
+            </div>
+
+            <input type="hidden" name="latitud" id="id_latitud">
+            <input type="hidden" name="longitud" id="id_longitud">
+        </form>
+    </div>
+
+    {% if puntos %}
+    <h3 class="mt-5 text-success">Resultados</h3>
+    <div class="row g-3">
+        {% for punto in puntos %}
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm h-100">
+                <strong>{{ punto.nombre }}</strong><br>
+                {{ punto.direccion }}<br>
+                {% if punto.telefono %}📞 {{ punto.telefono }}<br>{% endif %}
+                {% if punto.descripcion %}<small>{{ punto.descripcion }}</small>{% endif %}
+                {% if punto.latitud and punto.longitud %}
+                    <br>📍 Lat: {{ punto.latitud }}, Lon: {{ punto.longitud }}
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p class="text-muted mt-3">No se encontraron puntos con los filtros seleccionados.</p>
+    {% endif %}
+
+    <div class="mt-4 text-center">
+        <a href="{% url 'ecoeduca:inicio' %}" class="btn btn-success ecoedu-btn">
+            ⬅️ Volver al inicio
+        </a>
+    </div>
+</div>
+
+<script>
+    document.getElementById('mi-ubicacion-btn').addEventListener('click', function(){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                document.getElementById("id_latitud").value = position.coords.latitude;
+                document.getElementById("id_longitud").value = position.coords.longitude;
+                alert("Ubicación detectada. Haz clic en Buscar para ver los puntos cercanos.");
+            }, function(error){
+                alert("No se pudo obtener tu ubicación.");
+            });
+        } else {
+            alert("Tu navegador no soporta geolocalización.");
+        }
+    });
+</script>
+{% endblock %}
