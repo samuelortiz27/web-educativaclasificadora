@@ -8,13 +8,29 @@
     <div class="card shadow-lg p-4 text-center mx-auto ecoedu-clasificador-card">
         <h1 class="ecoedu-clasificador-titulo mb-3">Clasificador de Residuos</h1>
         <p class="ecoedu-clasificador-descripcion mb-4">
-            Sube una imagen para identificar el tipo de residuo y el contenedor adecuado.
+            Sube una imagen o toma una foto para identificar el tipo de residuo.
         </p>
 
         <form method="post" enctype="multipart/form-data" class="mb-4">
             {% csrf_token %}
-            <input type="file" name="imagen" accept="image/*" class="form-control mb-3" required>
-            <button type="submit" class="btn btn-success ecoedu-btn">Clasificar</button>
+
+            <input id="inputImagen" type="file" name="imagen" accept="image/*" class="form-control mb-3">
+
+            <button type="button" class="btn btn-secondary w-100 mb-3" onclick="activarCamara()">
+                📷 Usar cámara
+            </button>
+
+            <div id="camaraContainer" style="display:none;">
+                <video id="video" width="100%" autoplay class="rounded border shadow-sm"></video>
+
+                <button type="button" class="btn btn-primary mt-2" onclick="capturarFoto()">
+                    Tomar foto
+                </button>
+
+                <canvas id="canvas" style="display:none;"></canvas>
+            </div>
+
+            <button type="submit" class="btn btn-success ecoedu-btn w-100">Clasificar</button>
         </form>
 
         {% if imagen_url %}
@@ -48,6 +64,7 @@
                 <li class="list-group-item">
                     <strong>{{ punto.nombre }}</strong><br>
                     <span class="text-muted">{{ punto.direccion }}</span><br>
+
                     {% if punto.descripcion %}
                         <small>{{ punto.descripcion }}</small><br>
                     {% endif %}
@@ -60,13 +77,11 @@
                 {% endfor %}
             </ul>
 
-            <!-- Mapa -->
             <div id="map" style="height: 400px; width: 100%;"></div>
         </div>
         {% endif %}
         {% endif %}
 
-        <!-- Botón volver al inicio -->
         <div class="text-center mt-4">
             <a href="{% url 'ecoeduca:inicio' %}" class="btn btn-success ecoedu-btn">
                 Volver al inicio
@@ -75,30 +90,73 @@
     </div>
 </div>
 
+<script>
+let video = null;
+let stream = null;
+
+function activarCamara() {
+    document.getElementById("camaraContainer").style.display = "block";
+
+    video = document.getElementById("video");
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(s => {
+            stream = s;
+            video.srcObject = s;
+        })
+        .catch(err => alert("No se pudo acceder a la cámara: " + err));
+}
+
+function capturarFoto() {
+    const canvas = document.getElementById("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0);
+
+    canvas.toBlob(blob => {
+        const archivo = new File([blob], "foto.jpg", { type: "image/jpeg" });
+        const input = document.getElementById("inputImagen");
+
+        const dt = new DataTransfer();
+        dt.items.add(archivo);
+        input.files = dt.files;
+
+        input.required = true;
+
+        alert("📸 Foto capturada exitosamente.");
+
+        stream.getTracks().forEach(t => t.stop());
+        document.getElementById("camaraContainer").style.display = "none";
+    });
+}
+</script>
+
 {% if puntos_relacionados %}
-<!-- Leaflet CSS y JS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-    var map = L.map('map').setView([0, 0], 2); // vista inicial
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
+var map = L.map('map').setView([0, 0], 2);
 
-    var bounds = [];
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
 
-    {% for punto in puntos_relacionados %}
-        {% if punto.latitud and punto.longitud %}
-            var marker = L.marker([{{ punto.latitud }}, {{ punto.longitud }}]).addTo(map)
-                .bindPopup("<strong>{{ punto.nombre }}</strong><br>{{ punto.direccion }}");
-            bounds.push([{{ punto.latitud }}, {{ punto.longitud }}]);
-        {% endif %}
-    {% endfor %}
+var bounds = [];
 
-    if(bounds.length > 0){
-        map.fitBounds(bounds);
-    }
+{% for punto in puntos_relacionados %}
+    {% if punto.latitud and punto.longitud %}
+        var marker = L.marker([{{ punto.latitud }}, {{ punto.longitud }}]).addTo(map)
+            .bindPopup("<strong>{{ punto.nombre }}</strong><br>{{ punto.direccion }}");
+        bounds.push([{{ punto.latitud }}, {{ punto.longitud }}]);
+    {% endif %}
+{% endfor %}
+
+if(bounds.length > 0){
+    map.fitBounds(bounds);
+}
 </script>
 {% endif %}
 {% endblock %}

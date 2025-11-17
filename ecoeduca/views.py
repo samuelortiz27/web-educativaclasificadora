@@ -86,6 +86,7 @@ def detalle_residuos_general(request):
 ]
 
     return render(request, "ecoeduca/detalle_residuos.html", {"tipos_residuos": tipos_residuos})
+
 def informacion(request):
     return render(request, 'ecoeduca/informacion.html')
 
