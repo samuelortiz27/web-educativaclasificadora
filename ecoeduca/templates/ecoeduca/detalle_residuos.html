@@ -6,7 +6,9 @@
 {% block content %}
 <section class="detalle-residuos">
     <div class="text-center mb-5">
-        <h1 class="titulo-detalle">♻️ Tipos de Residuos</h1>
+        <h1 class="titulo-detalle">
+            <i class="bi bi-recycle text-success"></i> Tipos de Residuos
+        </h1>
         <p class="subtitulo-detalle">
             Conoce los principales tipos de residuos, su clasificación y el color de caneca donde deben depositarse correctamente.
         </p>
@@ -44,7 +46,9 @@
     </div>
 
     <div class="text-center mt-5">
-        <a href="{% url 'ecoeduca:aprende' %}" class="btn-volver">⬅️ Volver a Aprender</a>
+        <a href="{% url 'ecoeduca:aprende' %}" class="btn-volver">
+            <i class="bi bi-arrow-left-circle"></i> Volver a Aprender
+        </a>
     </div>
 </section>
 {% endblock %}

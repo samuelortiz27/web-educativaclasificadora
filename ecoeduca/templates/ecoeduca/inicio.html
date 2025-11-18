@@ -4,36 +4,74 @@
 {% block title %}Inicio — EcoEduca{% endblock %}
 
 {% block content %}
-<header class="inicio-header">
-    <h1 class="inicio-titulo">♻️ EcoEduca</h1>
-    <p class="inicio-subtitulo">Aprende, clasifica y cuida el planeta 🌎</p>
+<header class="inicio-header text-center">
+    <h1 class="inicio-titulo">
+        <i class="bi bi-recycle" style="font-size: 1.8rem; margin-right: 8px; color: #c5ffcf;"></i>Educación Ambiental Inteligente
+
+    </h1>
+    <p class="inicio-subtitulo">
+        Aprende, clasifica y cuida el planeta 
+        <i class="bi bi-globe-americas text-light"></i>
+    </p>
 </header>
 
 <section class="inicio-hero">
     <div class="inicio-hero-content">
-        <h2>Aprende a cuidar el planeta</h2>
-        <p>Descubre cómo reducir, reutilizar y reciclar de manera inteligente con la ayuda de la inteligencia artificial.</p>
-        <a href="{% url 'clasificador:clasificar' %}" class="inicio-btn">Probar Clasificador</a>
+        <h2>
+            Aprende a cuidar el planeta
+        </h2>
+
+        <p>
+            Descubre cómo reducir, reutilizar y reciclar de manera inteligente con la ayuda de la inteligencia artificial.
+        </p>
+
+        <a href="{% url 'clasificador:clasificar' %}" class="inicio-btn">
+            <i class="bi bi-cpu-fill"></i> Probar Clasificador
+        </a>
     </div>
 </section>
 
 <section class="inicio-info">
-    <h2>¿Qué encontrarás aquí?</h2>
+    <h2>
+        <i class="bi bi-info-circle-fill text-success"></i>
+        ¿Qué encontrarás aquí?
+    </h2>
+
     <div class="inicio-cards">
+
+        <!-- EDUCACIÓN AMBIENTAL -->
         <div class="inicio-card">
-            <h3>🌿 Educación ambiental</h3>
+            <h3>
+                <i class="bi bi-book-half text-success"></i> Educación ambiental
+            </h3>
             <p>Aprende sobre los tipos de residuos, su impacto y cómo clasificarlos correctamente.</p>
-            <a href="{% url 'ecoeduca:aprende' %}" class="btn btn-success mt-2">Ir a Aprende</a>
+            <a href="{% url 'ecoeduca:aprende' %}" class="btn btn-success mt-2">
+                <i class="bi bi-journal-bookmark-fill"></i> Ir a Aprende
+            </a>
         </div>
+
+        <!-- CLASIFICADOR IA -->
         <div class="inicio-card">
-            <h3>🤖 Clasificador inteligente</h3>
+            <h3>
+                <i class="bi bi-robot text-primary"></i> Clasificador inteligente
+            </h3>
             <p>Usa nuestra IA para identificar materiales reciclables en tiempo real.</p>
-            <a href="{% url 'clasificador:clasificar' %}" class="btn btn-success mt-2">Probar Clasificador</a>
+            <a href="{% url 'clasificador:clasificar' %}" class="btn btn-success mt-2">
+                <i class="bi bi-cpu-fill"></i> Probar Clasificador
+            </a>
         </div>
+
+        <!-- PUNTOS DE RECICLAJE -->
         <div class="inicio-card">
-    <h3>📍 Puntos de reciclaje</h3>
-    <p>Encuentra los lugares más cercanos de la ciudad para dejar tus residuos correctamente.</p>
-    <a href="{% url 'puntos:mapa_y_busqueda' %}" class="btn btn-success mt-2"> Ver puntos por categoría</a>
-</div>
+            <h3>
+                <i class="bi bi-geo-alt-fill text-warning"></i> Puntos de reciclaje
+            </h3>
+            <p>Encuentra los lugares más cercanos de la ciudad para dejar tus residuos correctamente.</p>
+            <a href="{% url 'puntos:mapa_y_busqueda' %}" class="btn btn-success mt-2">
+                <i class="bi bi-map-fill"></i> Ver puntos por categoría
+            </a>
+        </div>
+
+    </div>
 </section>
 {% endblock %}

@@ -6,7 +6,9 @@
 {% block content %}
 <section class="impacto-ambiental py-5" style="background-color: #f4f9f4;">
     <div class="container text-center mb-5">
-        <h1 class="display-5 fw-bold text-success mb-3">🌍 Impacto Ambiental del Mal Reciclaje</h1>
+        <h1 class="display-5 fw-bold text-success mb-3">
+            <i class="bi bi-globe2" style="color: #0a7a33;"></i> Impacto Ambiental del Mal Reciclaje
+        </h1>
         <p class="lead text-muted mx-auto" style="max-width: 900px;">
             Cada desecho que tiramos sin clasificar correctamente tiene un efecto directo sobre el planeta.
             El mal reciclaje contribuye al cambio climático, contamina los ecosistemas y pone en riesgo la vida
@@ -17,7 +19,9 @@
     <div class="container bg-white rounded-4 shadow-sm p-5 mb-5">
         <div class="row align-items-center">
             <div class="col-md-6">
-                <h2 class="text-primary mb-3">💨 Contaminación del aire y del agua</h2>
+                <h2 class="text-primary mb-3">
+                    <i class="bi bi-wind text-primary"></i> Contaminación del aire y del agua
+                </h2>
                 <p>
                     Cuando los residuos se depositan en lugares no adecuados, liberan gases como metano, dióxido de carbono 
                     y óxidos de nitrógeno, que contribuyen al calentamiento global. 
@@ -39,7 +43,9 @@
     <div class="container bg-white rounded-4 shadow-sm p-5 mb-5">
         <div class="row align-items-center flex-md-row-reverse">
             <div class="col-md-6">
-                <h2 class="text-success mb-3">🐢 Daños a la fauna y flora</h2>
+                <h2 class="text-success mb-3">
+                    <i class="bi bi-flower3 text-success"></i> Daños a la fauna y flora
+                </h2>
                 <p>
                     Los animales marinos y terrestres confunden los residuos con alimento o quedan atrapados en ellos.
                     Cada año, más de <strong>100.000 animales marinos</strong> mueren por ingerir plástico.
@@ -60,7 +66,9 @@
     <div class="container bg-white rounded-4 shadow-sm p-5 mb-5">
         <div class="row align-items-center">
             <div class="col-md-6">
-                <h2 class="text-danger mb-3">🔥 Aumento de vertederos y pérdida de suelos</h2>
+                <h2 class="text-danger mb-3">
+                    <i class="bi bi-fire text-danger"></i> Aumento de vertederos y pérdida de suelos
+                </h2>
                 <p>
                     El crecimiento descontrolado de los vertederos provoca la pérdida de grandes extensiones de tierra fértil,
                     destruye hábitats naturales y emite gases tóxicos. 
@@ -80,7 +88,9 @@
     </div>
 
     <div class="container bg-light rounded-4 shadow-sm p-5">
-        <h2 class="text-center text-success mb-4">♻️ Soluciones sostenibles</h2>
+        <h2 class="text-center text-success mb-4">
+            <i class="bi bi-recycle text-success"></i> Soluciones sostenibles
+        </h2>
         <p class="text-center mb-4">
             El cambio comienza con pequeñas acciones diarias. 
             Si cada persona clasifica sus residuos correctamente y adopta hábitos sostenibles, 
@@ -90,25 +100,25 @@
         <div class="row text-center g-4">
             <div class="col-md-3">
                 <div class="p-3 border rounded-4 bg-white shadow-sm h-100">
-                    <h5>🏠 Clasifica en casa</h5>
+                    <h5><i class="bi bi-house-door"></i> Clasifica en casa</h5>
                     <p>Separa los residuos orgánicos, reciclables y no reciclables antes de sacarlos.</p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="p-3 border rounded-4 bg-white shadow-sm h-100">
-                    <h5>👜 Reutiliza y reduce</h5>
+                    <h5><i class="bi bi-bag-check"></i> Reutiliza y reduce</h5>
                     <p>Evita plásticos de un solo uso y prefiere productos reutilizables.</p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="p-3 border rounded-4 bg-white shadow-sm h-100">
-                    <h5>🤝 Participa</h5>
+                    <h5><i class="bi bi-people"></i> Participa</h5>
                     <p>Únete a programas de reciclaje y campañas ambientales locales.</p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="p-3 border rounded-4 bg-white shadow-sm h-100">
-                    <h5>🌱 Educa</h5>
+                    <h5><i class="bi bi-leaf"></i> Educa</h5>
                     <p>Comparte el conocimiento sobre reciclaje y sostenibilidad con tu comunidad.</p>
                 </div>
             </div>
@@ -116,8 +126,8 @@
     </div>
 
     <div class="text-center mt-5">
-        <a href="{% url 'ecoeduca:aprende' %}" class="btn btn-success btn-lg rounded-pill shadow-sm px-5 py-2">
-            ⬅️ Volver a Aprender
+        <a href="{% url 'ecoeduca:aprende' %}" class="btn-volver">
+            <i class="bi bi-arrow-left-circle"></i> Volver a Aprender
         </a>
     </div>
 </section>
