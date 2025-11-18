@@ -138,7 +138,7 @@ body {
     margin: 0;
     padding: 0;
 
-    font-family: 'Poppins', sans-serif; /* 🔥 ahora sí aplica */
+    font-family: 'Poppins', sans-serif; 
 }
 
 .inicio-menu a {
@@ -150,7 +150,7 @@ body {
 }
 
 .inicio-menu a:hover {
-    color: #c5ffcf;  /* más moderno que underline */
+    color: #c5ffcf; 
     transform: translateY(-3px);
 }
 
@@ -163,11 +163,9 @@ body {
     padding: 6rem 1rem;
     position: relative;
 
-    /* Bordes superiores rectos para unir con header */
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 
-    /* Bordes inferiores redondeados solo en esquinas */
     border-bottom-left-radius: 60px;
     border-bottom-right-radius: 60px;
 
@@ -187,7 +185,6 @@ body {
     max-width: 700px;
     margin: 0 auto;
 
-    /* CURVAS SUAVES */
     padding: 2rem 1rem;
     border-radius: 20px;
     backdrop-filter: blur(2px);
@@ -216,7 +213,6 @@ body {
     background-color: #66bb6a;
 }
 
-/* --- SECCIÓN INFORMATIVA --- */
 .inicio-info {
     text-align: center;
     padding: 4rem 2rem;
